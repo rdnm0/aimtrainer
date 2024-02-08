@@ -91,4 +91,24 @@ while running:
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
-            
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                mouse_pos = pygame.mouse.get_pos()
+                for i, pos in enumerate(option_positions):
+                    if pos[0] - 100 < mouse_pos[0] < pos[0] + 100 and pos[1] - 25 < mouse_pos[1] < pos[1] + 25:
+                        chosen = True
+                        if i == 0:
+                            time_limit = 10000
+                        elif i == 1:
+                            time_limit = 20000
+                        elif i == 2:
+                            time_limit = 30000
+
+    if game_loop(time_limit):
+        draw_text("Time's up! Your final score: " + str(score), font, BLACK, screen, WIDTH // 2, HEIGHT // 2)
+        pygame.display.flip()
+        pygame.time.wait(3000)  
+    else:
+        break
+
+pygame.quit()
+sys.exit()
