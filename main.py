@@ -41,7 +41,7 @@ def game_loop(time_limit):
 
     circle_x, circle_y = generate_circle_position()
 
-while True:
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return False
@@ -71,3 +71,24 @@ while True:
         pygame.display.flip()
 
         clock.tick(30)
+
+while running:
+    screen.fill(WHITE)
+    font = pygame.font.SysFont(None, 36)
+    draw_text("Choose a countdown time:", font, BLACK, screen, WIDTH // 2, HEIGHT // 4)
+
+    option_texts = ["10 seconds", "20 seconds", "30 seconds"]
+    option_positions = [(WIDTH // 2, HEIGHT // 2 + i * 50) for i in range(3)]
+
+    for text, pos in zip(option_texts, option_positions):
+        draw_text(text, font, BLACK, screen, *pos)
+
+    pygame.display.flip()
+
+    chosen = False
+    while not chosen:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            
